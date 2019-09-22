@@ -7,10 +7,10 @@
 	
 ### Open command line and run following command
 	pip install Django
-	pip install djangorestframework```
+	pip install djangorestframework
 	pip install sqlparse
 
-### Run the Server```
+### Run the Server
 	python manage.py runserver
 
 #### note : If you can use Anaconda virtual environment, it is good to go :)
