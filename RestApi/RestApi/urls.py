@@ -19,7 +19,8 @@ from fuzzyApp import  views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('test/', views.test),
+    path('testget/', views.get),
+    path('testpost/', views.post),
 
 
 ]

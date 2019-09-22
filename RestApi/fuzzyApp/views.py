@@ -10,10 +10,10 @@ import json
 
 # Example Post Request
 @api_view(["POST"])
-def test(data):
+def post(data):
     datareturn =json.loads(data.body)
     return JsonResponse(datareturn)
 
 @api_view(["GET"])
-def test(self):
+def get(self):
     return Response("This is a get Request",status.HTTP_200_OK)
