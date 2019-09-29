@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "eco-room",
+  "private_key_id": "415620948116919cca699a2b68f536632694ac53",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDpwJgwZcKMseEO\nzjnIgpnv17ipR7ZlyyW5H1EvaPOrRHP83AlPZFGPyTdHXfwjXXhK3COumaUabKgR\nunKvBI93CssJv2xjCiOGolih35QsL9uoL1rqeiAysGR4WP5pkzXXUkxpm2nLSXOf\nwYCPJ6s4MPajQBf6nmfQHSAUt4dh+ckRVC58iWi9wAcg7WzJ8s+7e7+AgFgBUKcp\nObsk0pRUpVtwqndR2AJo2DbxjbFIj2Msrww509ComV2/FBTsPIZTpyYfsoRGlu5g\nVXw29heVCmDCdvz7/1GAiWs27sTtYKx2RkvXJhfFhG+hLDo2i7BG9UrcE+m6VYk+\nl1RY5r+NAgMBAAECggEACbvMWo+SN1uc3In33AKcOGGKPfpPfROlgXztW4UKSIJ0\nNf5PoO+zecJOO/mM60gUH0HldnrNZjlKElrqNaGB+9oGNGS1NbaRXiTaffsaZ3Ci\nu/Ek3wiw2IuB04UZKvpHTq0No4QmNqHbX7amDNABEDjxvECJ/xSjjAX6dQJjb8/r\nj0AY2M5mIyUxNsih2JcPs3z6M9T1g8UjZEwEYVos9SYCcFe0iOhSfWJ5A2LLTSsd\nO2RAn3GmT8g724RvljVzJbSs+gNPtIY+cew7M4MGIzU3Bccocti8Ee4k3adURw6T\nzBtav5VYDyLxjkaDYMqobjrYhcjDUSAIrg5jozXHYQKBgQD7IJ7nf9Cvu71pczZC\njNt+IvxNMsYz2he3G5o/VHbImt7oQwXNvgertNeerj03LbYYrzQCM/6ZrBZu9wAn\n5SSeqyBAP7+QLL7xuRLtnjRZV7av5a3uM0P942tcDUSMDzzFsyGErKYemuYRpZ+3\nrkhdBR5Exvigcqt2IdMPSJm3eQKBgQDuSatrHK/Q+LFAV7Vq2doJB/iUp6xRrNYk\nu2jTBR6yvhfpz7qH79oms4lsF85NRL3cmCuVQuA2khU2STkQVSM44XwLzVki1RZ3\nJmYxMFQFguYaNWqSlTbg6z0g6Ut7t1FRW2DsCcCj2cGq4k7pOP4TGoI+xtg0XxVQ\njDQF4At/tQKBgFvtBv4LBaMugBl3uScHVNmJiP3hVjho30GB8ya3jnvEZVB0KE22\nACzUmBFYCsSGESBcEhe0XMB4BAY+mGoCMTN7xOR/8WmfV444hztALD2AJDmjQ9Xs\nIjlv5D7gBHWYplBgUCa25GBTp2BSVnLwc0DJvNjEVQK2txkZLJ9tngdRAoGBAKub\nxqYnTL90u0KZaAAB0LK8WNvGPaW8kaR2i7GdeFRF7rbmcXHA3R0OI6QDKQIgxZN+\ny7R9Kzhh0ID+DuiiR/GJAmsFgnJBgCJjNymponktokWxvoS+jX1CLQ3stf3tMdUj\nuBOFmoTmKEHHJgl0kBZ1+uL3FXHyIEmYD0dD6UQZAoGAeBEN1MYraunVIArDJFXP\nBuHOSTPggrmJoifZuEKX2rY+UFh9D+ENCmYYwPrBpfHImUO/x5fc1osViQuaoKpC\nEfXZGifKzh8Xj09f2zgnKcWotHt1fza64hAjO0cTl/fCiVEucKm1MWGqRJwIsdnk\nVrQVEbarkVENDqpIDhV/Vrc=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-o230b@eco-room.iam.gserviceaccount.com",
+  "client_id": "115816831989113076469",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-o230b%40eco-room.iam.gserviceaccount.com"
+}
