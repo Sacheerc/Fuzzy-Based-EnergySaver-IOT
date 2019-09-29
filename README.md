@@ -9,6 +9,9 @@
 	pip install Django
 	pip install djangorestframework
 	pip install sqlparse
+	pip install --upgrade firebase-admin
+	pip install scikit-fuzzy
+	pip install matplotlib
 
 ### Run the Server
 	python manage.py runserver
