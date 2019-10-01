@@ -27,18 +27,22 @@ void setup() {
 }
 
 void loop() {
+  float temp=24.5;
+  float light=45.4;
+  
   if((WiFiMulti.run() == WL_CONNECTED)) {
         StaticJsonBuffer<300> JSONbuffer;   //Declaring static JSON buffer
         JsonObject& JSONencoder = JSONbuffer.createObject(); 
  
-        JSONencoder["sensorType"] = "Temperature"; 
+        JSONencoder["temperature"] = temp; 
+        JSONencoder["light"] = light; 
         char JSONmessageBuffer[300];
         JSONencoder.prettyPrintTo(JSONmessageBuffer, sizeof(JSONmessageBuffer));
         Serial.println(JSONmessageBuffer);
 
         HTTPClient http;
         
-        http.begin("http://192.168.1.6:8000/testpost/");      //Specify request destination
+        http.begin("http://192.168.1.6:8000/indata/");      //Specify request destination
         http.addHeader("Content-Type", "application/json");  //Specify content-type header
 
         int httpCode = http.POST(JSONmessageBuffer);   //Send the request

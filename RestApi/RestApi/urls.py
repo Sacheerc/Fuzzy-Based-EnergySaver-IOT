@@ -20,7 +20,7 @@ from fuzzyApp import  views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('testget/', views.get),
-    path('testpost/', views.post),
+    path('indata/', views.sensor_data_in),
 
 
 ]

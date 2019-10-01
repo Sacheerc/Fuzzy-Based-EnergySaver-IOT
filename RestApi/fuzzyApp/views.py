@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 import json
 import dbconfig as firestore
+from datetime import datetime
 import numpy as np
 import skfuzzy as fuzz
 from skfuzzy import control as ctrl
@@ -14,10 +15,18 @@ from skfuzzy import control as ctrl
 
 # Example Post Request
 @api_view(["POST"])
-def post(data):
+def sensor_data_in(data):
     datareturn =json.loads(data.body)
-    doc_ref = firestore.db.collection(u'input_members').document(u'test1')
-    doc_ref.set(datareturn)
+    datareturn['timestamp']= datetime.now()
+    data_front= json.loads(data.body)
+    data_front['output_ac'] = 34
+    data_front['output_lights'] = 55
+    data_front['timestamp'] = datetime.now()
+
+    doc_ref1 = firestore.db.collection(u'input_members').document()
+    doc_ref2 = firestore.db.collection(u'current_env').document(u'c_env')
+    doc_ref1.set(datareturn)
+    doc_ref2.set(data_front)
     print(datareturn)
     return JsonResponse(datareturn)
 
