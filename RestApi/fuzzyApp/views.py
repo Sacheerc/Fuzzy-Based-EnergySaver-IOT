@@ -18,6 +18,7 @@ def post(data):
     datareturn =json.loads(data.body)
     doc_ref = firestore.db.collection(u'input_members').document(u'test1')
     doc_ref.set(datareturn)
+    print(datareturn)
     return JsonResponse(datareturn)
 
 @api_view(["GET"])
