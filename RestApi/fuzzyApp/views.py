@@ -25,36 +25,63 @@ def post(data):
 def get(self):
     # New Antecedent/Consequent objects hold universe variables and membership
     # functions
-    quality = ctrl.Antecedent(np.arange(0, 11, 1), 'quality')
-    service = ctrl.Antecedent(np.arange(0, 11, 1), 'service')
-    tip = ctrl.Consequent(np.arange(0, 26, 1), 'tip')
+    # quality = ctrl.Antecedent(np.arange(0, 11, 1), 'quality')
+    # service = ctrl.Antecedent(np.arange(0, 11, 1), 'service')
+    # tip = ctrl.Consequent(np.arange(0, 26, 1), 'tip')
+
+    # Input and Output array declaration
+    light_level = ctrl.Antecedent(np.arange(0, 21, 1), 'light_level') # should change the range according to the sensor value
+    temp_level = ctrl.Antecedent(np.arange(0, 21, 1), 'temp_level') # should change the range according to the sensor value
+    power_level_for_light = ctrl.Antecedent(np.arange(0, 11, 1), 'power_level_for_light') # should change the range according to the sensor value
+    power_level_for_temp = ctrl.Antecedent(np.arange(0, 11, 1), 'power_level_for_temp') # should change the range according to the sensor value
 
     # Auto-membership function population is possible with .automf(3, 5, or 7)
-    quality.automf(3)
-    service.automf(3)
+    # quality.automf(3)
+    # service.automf(3)
+
+    # Auto membership function population
+    light_level.automf(3) # poor, average, good
+    temp_level.automf(3)
+    power_level_for_light.automf(3)
+    power_level_for_temp.automf(3)
 
     # Custom membership functions can be built interactively with a familiar,
     # Pythonic API
-    tip['low'] = fuzz.trimf(tip.universe, [0, 0, 13])
-    tip['medium'] = fuzz.trimf(tip.universe, [0, 13, 25])
-    tip['high'] = fuzz.trimf(tip.universe, [13, 25, 25])
+    # tip['low'] = fuzz.trimf(tip.universe, [0, 0, 13])
+    # tip['medium'] = fuzz.trimf(tip.universe, [0, 13, 25])
+    # tip['high'] = fuzz.trimf(tip.universe, [13, 25, 25])
 
     # quality.view()
     # service.view()
     # tip.view()
 
-    rule1 = ctrl.Rule(quality['poor'] | service['poor'], tip['low'])
-    rule2 = ctrl.Rule(service['average'], tip['medium'])
-    rule3 = ctrl.Rule(service['good'] | quality['good'], tip['high'])
+    # rule1 = ctrl.Rule(quality['poor'] | service['poor'], tip['low'])
+    # rule2 = ctrl.Rule(service['average'], tip['medium'])
+    # rule3 = ctrl.Rule(service['good'] | quality['good'], tip['high'])
 
-    tipping_ctrl = ctrl.ControlSystem([rule1, rule2, rule3])
-    tipping = ctrl.ControlSystemSimulation(tipping_ctrl)
+    # rules initialization
+    rule1 = ctrl.Rule(light_level['poor'] & temp_level['poor'], (power_level_for_light['good'], power_level_for_temp['good']))
+    rule2 = ctrl.Rule(light_level['poor'] & temp_level['poor'], (power_level_for_light['good'], power_level_for_temp['good']))
+    rule3 = ctrl.Rule(light_level['poor'] & temp_level['poor'], (power_level_for_light['good'], power_level_for_temp['good']))
 
-    tipping.input['quality'] = 6.5
-    tipping.input['service'] = 9.8
+    # tipping_ctrl = ctrl.ControlSystem([rule1, rule2, rule3])
+    # tipping = ctrl.ControlSystemSimulation(tipping_ctrl)
 
-    tipping.compute()
+    # Control system and simulation
+    power_ctrl = ctrl.ControlSystem([rule1, rule2, rule3])
+    power = ctrl.ControlSystemSimulation(power_ctrl)
 
-    print(tipping.output['tip'])
+    # tipping.input['quality'] = 6.5
+    # tipping.input['service'] = 9.8
+
+    # tipping.compute()
+
+    power.input['light_level'] = 6.5
+    power.input['temp_level'] = 9.8
+
+    power.compute()
+
+    # print(tipping.output['tip'])
     #tip.view(sim=tipping)
-    return Response(str(tipping.output['tip']),status.HTTP_200_OK)
+    # return Response(str(tipping.output['tip']),status.HTTP_200_OK)
+    return Response(str(power.output['power_level_for_light']) + ' - ' + str(power.output['power_level_for_temp']), status.HTTP_200_OK)

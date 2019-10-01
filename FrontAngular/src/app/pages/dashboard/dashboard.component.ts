@@ -307,6 +307,7 @@ export class DashboardComponent implements OnInit {
       }
     };
 
+    // ------------ shipment chart
     this.canvas = document.getElementById("chartLineRed");
     this.ctx = this.canvas.getContext("2d");
 
@@ -342,8 +343,9 @@ export class DashboardComponent implements OnInit {
       data: data,
       options: gradientChartOptionsConfigurationWithTooltipRed
     });
+    // ------------ shipment chart
 
-
+    // ------------ tasks chart
     this.canvas = document.getElementById("chartLineGreen");
     this.ctx = this.canvas.getContext("2d");
 
@@ -381,9 +383,9 @@ export class DashboardComponent implements OnInit {
       options: gradientChartOptionsConfigurationWithTooltipGreen
 
     });
+    // ------------ tasks chart
 
-
-
+    // ------------ big chart
     var chart_labels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
     this.datasets = [
       [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100],
@@ -428,8 +430,9 @@ export class DashboardComponent implements OnInit {
       options: gradientChartOptionsConfigurationWithTooltipRed
     };
     this.myChartData = new Chart(this.ctx, config);
+    // ------------ big chart
 
-
+    // ------------ sales chart
     this.canvas = document.getElementById("CountryChart");
     this.ctx  = this.canvas.getContext("2d");
     var gradientStroke = this.ctx.createLinearGradient(0, 230, 0, 50);
@@ -461,6 +464,7 @@ export class DashboardComponent implements OnInit {
       },
       options: gradientBarChartConfiguration
     });
+    // ------------ sales chart
 
   }
   public updateOptions() {
