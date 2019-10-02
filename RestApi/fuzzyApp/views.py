@@ -3,23 +3,38 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from datetime import datetime
+from skfuzzy import control as ctrl
+
 import json
 import dbconfig as firestore
 import numpy as np
-import skfuzzy as fuzz
-from skfuzzy import control as ctrl
+import fuzzyApp.utils as utils
+
+
 
 
 # Create your views here.
 
 # Example Post Request
 @api_view(["POST"])
-def post(data):
+def sensor_data_in(data):
     datareturn =json.loads(data.body)
-    doc_ref = firestore.db.collection(u'input_members').document(u'test1')
-    doc_ref.set(datareturn)
-    return JsonResponse(datareturn)
+    data_front= json.loads(data.body)
+    out_light,out_temp = utils.fuzzy_val_generator(datareturn['light'],datareturn['temperature'])
+    datareturn['timestamp'] = datetime.now()
+    data_front['output_ac'] = out_light
+    data_front['output_lights'] = out_temp
+    data_front['timestamp'] = datetime.now()
 
+    doc_ref1 = firestore.db.collection(u'input_members').document()
+    doc_ref2 = firestore.db.collection(u'current_env').document(u'c_env')
+    doc_ref1.set(datareturn)
+    doc_ref2.set(data_front)
+    print(datareturn)
+    return JsonResponse(data_front)
+
+## Clear this function after using this example!!!!!
 @api_view(["GET"])
 def get(self):
     # New Antecedent/Consequent objects hold universe variables and membership
