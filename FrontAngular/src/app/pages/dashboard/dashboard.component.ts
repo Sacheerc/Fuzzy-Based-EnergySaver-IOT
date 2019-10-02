@@ -307,8 +307,8 @@ export class DashboardComponent implements OnInit {
       }
     };
 
-    // ------------ shipment chart
-    this.canvas = document.getElementById("chartLineRed");
+    // ------------ light power - output chart
+    this.canvas = document.getElementById("chartLightPower");
     this.ctx = this.canvas.getContext("2d");
 
     var gradientStroke = this.ctx.createLinearGradient(0, 230, 0, 50);
@@ -343,10 +343,10 @@ export class DashboardComponent implements OnInit {
       data: data,
       options: gradientChartOptionsConfigurationWithTooltipRed
     });
-    // ------------ shipment chart
+    // ------------ light power - output chart
 
     // ------------ tasks chart
-    this.canvas = document.getElementById("chartLineGreen");
+    this.canvas = document.getElementById("chartTempPower");
     this.ctx = this.canvas.getContext("2d");
 
 
@@ -401,9 +401,9 @@ export class DashboardComponent implements OnInit {
 
     var gradientStroke = this.ctx.createLinearGradient(0, 230, 0, 50);
 
-    gradientStroke.addColorStop(1, 'rgba(233,32,16,0.2)');
-    gradientStroke.addColorStop(0.4, 'rgba(233,32,16,0.0)');
-    gradientStroke.addColorStop(0, 'rgba(233,32,16,0)'); //red colors
+    gradientStroke.addColorStop(1, 'rgba(29,140,248,0.2)');
+    gradientStroke.addColorStop(0.4, 'rgba(29,140,248,0.0)');
+    gradientStroke.addColorStop(0, 'rgba(29,140,248,0)'); //blue colors
 
     var config = {
       type: 'line',
@@ -413,13 +413,13 @@ export class DashboardComponent implements OnInit {
           label: "My First dataset",
           fill: true,
           backgroundColor: gradientStroke,
-          borderColor: '#ec250d',
+          borderColor: '#1f8ef1',
           borderWidth: 2,
           borderDash: [],
           borderDashOffset: 0.0,
-          pointBackgroundColor: '#ec250d',
+          pointBackgroundColor: '#1f8ef1',
           pointBorderColor: 'rgba(255,255,255,0)',
-          pointHoverBackgroundColor: '#ec250d',
+          pointHoverBackgroundColor: '#1f8ef1',
           pointBorderWidth: 20,
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
