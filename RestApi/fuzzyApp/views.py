@@ -10,7 +10,7 @@ import json
 import dbconfig as firestore
 import numpy as np
 import fuzzyApp.utils as utils
-import skfuzzy as fuzz
+
 
 
 
@@ -20,10 +20,11 @@ import skfuzzy as fuzz
 @api_view(["POST"])
 def sensor_data_in(data):
     datareturn =json.loads(data.body)
-    datareturn['timestamp']= datetime.now()
     data_front= json.loads(data.body)
-    data_front['output_ac'] = 34
-    data_front['output_lights'] = 55
+    out_light,out_temp = utils.fuzzy_val_generator(datareturn['light'],datareturn['temperature'])
+    datareturn['timestamp'] = datetime.now()
+    data_front['output_ac'] = out_light
+    data_front['output_lights'] = out_temp
     data_front['timestamp'] = datetime.now()
 
     doc_ref1 = firestore.db.collection(u'input_members').document()
@@ -31,8 +32,9 @@ def sensor_data_in(data):
     doc_ref1.set(datareturn)
     doc_ref2.set(data_front)
     print(datareturn)
-    return JsonResponse(datareturn)
+    return JsonResponse(data_front)
 
+## Clear this function after using this example!!!!!
 @api_view(["GET"])
 def get(self):
     # New Antecedent/Consequent objects hold universe variables and membership
