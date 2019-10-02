@@ -3,12 +3,15 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from datetime import datetime
+from skfuzzy import control as ctrl
+
 import json
 import dbconfig as firestore
-from datetime import datetime
 import numpy as np
+import fuzzyApp.utils as utils
 import skfuzzy as fuzz
-from skfuzzy import control as ctrl
+
 
 
 # Create your views here.
