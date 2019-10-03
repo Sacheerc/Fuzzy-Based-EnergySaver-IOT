@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import Chart from 'chart.js';
+import { FireService } from 'src/app/services/fire.service';
 
 @Component({
   selector: "app-icons",
@@ -12,9 +13,23 @@ export class IconsComponent implements OnInit {
   public datasets: any;
   public data: any;
 
-  constructor() {  }
+  public curr_time: number;
+  public curr_light: number;
+  public curr_temp: number;
+
+  public timeLineList = [0, 0, 0, 0, 0, 0];
+  public lightDataList = [0, 0, 0, 0, 0, 0];
+  public tempDataList = [0, 0, 0, 0, 0, 0];
+
+  constructor(private fs: FireService) {
+    this.curr_time = 0;
+  }
 
   ngOnInit() {
+    this.fs.getCurrentEnv().subscribe((ce: any) => {
+      this.curr_light = ce.light;
+      this.curr_temp = ce.temperature;
+    });
 
     var gradientChartOptionsConfigurationWithTooltipRed: any = {
       maintainAspectRatio: false,
@@ -42,9 +57,9 @@ export class IconsComponent implements OnInit {
             zeroLineColor: "transparent",
           },
           ticks: {
-            suggestedMin: 60,
-            suggestedMax: 125,
-            padding: 20,
+            suggestedMin: 2,
+            suggestedMax: 6,
+            padding: 1,
             fontColor: "#9a9a9a"
           }
         }],
@@ -90,9 +105,9 @@ export class IconsComponent implements OnInit {
             zeroLineColor: "transparent",
           },
           ticks: {
-            suggestedMin: 50,
-            suggestedMax: 125,
-            padding: 20,
+            suggestedMin: 2,
+            suggestedMax: 6,
+            padding: 2,
             fontColor: "#9e9e9e"
           }
         }],
@@ -122,8 +137,8 @@ export class IconsComponent implements OnInit {
     gradientStroke.addColorStop(0.4, 'rgba(233,32,16,0.0)');
     gradientStroke.addColorStop(0, 'rgba(233,32,16,0)'); //red colors
   
-    var data = {
-      labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+    var data1 = {
+      labels: this.timeLineList,
       datasets: [{
         label: "Data",
         fill: true,
@@ -139,13 +154,13 @@ export class IconsComponent implements OnInit {
         pointHoverRadius: 4,
         pointHoverBorderWidth: 15,
         pointRadius: 4,
-        data: [80, 100, 70, 80, 120, 80],
+        data: this.lightDataList,
       }]
     };
   
-    var myChart = new Chart(this.ctx, {
+    var myChart1 = new Chart(this.ctx, {
       type: 'line',
-      data: data,
+      data: data1,
       options: gradientChartOptionsConfigurationWithTooltipRed
     });
     // ------------ light power - output chart
@@ -161,8 +176,8 @@ export class IconsComponent implements OnInit {
     gradientStroke.addColorStop(0.4, 'rgba(66,134,121,0.0)'); //green colors
     gradientStroke.addColorStop(0, 'rgba(66,134,121,0)'); //green colors
   
-    var data = {
-      labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV'],
+    var data2 = {
+      labels: this.timeLineList,
       datasets: [{
         label: "My First dataset",
         fill: true,
@@ -178,17 +193,37 @@ export class IconsComponent implements OnInit {
         pointHoverRadius: 4,
         pointHoverBorderWidth: 15,
         pointRadius: 4,
-        data: [90, 27, 60, 12, 80],
+        data: this.tempDataList,
       }]
     };
   
-    var myChart = new Chart(this.ctx, {
+    var myChart2 = new Chart(this.ctx, {
       type: 'line',
-      data: data,
+      data: data2,
       options: gradientChartOptionsConfigurationWithTooltipGreen
   
     });
     // ------------ temp power - output chart
 
+    setInterval(()=> {
+      this.lightDataList.shift();
+      this.lightDataList.push(this.curr_light);
+      this.tempDataList.shift();
+      this.tempDataList.push(this.curr_temp);
+      this.updateTimeLine();
+      myChart1.update();
+      myChart2.update();
+    }, 2000);
+
+  }
+
+  updateTimeLine() {
+    if(this.curr_time >= 58) {
+      this.curr_time = 0;
+    } else {
+      this.curr_time += 2;
+    }
+    this.timeLineList.shift();
+    this.timeLineList.push(this.curr_time);
   }
 }
