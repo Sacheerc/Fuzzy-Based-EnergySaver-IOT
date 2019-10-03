@@ -6,6 +6,7 @@ from rest_framework import status
 from datetime import datetime
 from skfuzzy import control as ctrl
 
+import skfuzzy as fuzz
 import json
 import dbconfig as firestore
 import numpy as np
@@ -19,19 +20,16 @@ import fuzzyApp.utils as utils
 # Example Post Request
 @api_view(["POST"])
 def sensor_data_in(data):
-    datareturn =json.loads(data.body)
     data_front= json.loads(data.body)
-    out_light,out_temp = utils.fuzzy_val_generator(datareturn['light'],datareturn['temperature'])
-    datareturn['timestamp'] = datetime.now()
+    out_light,out_temp = utils.fuzzy_val_generator(data_front['light'],data_front['temperature'])
     data_front['output_ac'] = out_light
     data_front['output_lights'] = out_temp
     data_front['timestamp'] = datetime.now()
-
+    
     doc_ref1 = firestore.db.collection(u'input_members').document()
     doc_ref2 = firestore.db.collection(u'current_env').document(u'c_env')
-    doc_ref1.set(datareturn)
+    doc_ref1.set(data_front)
     doc_ref2.set(data_front)
-    print(datareturn)
     return JsonResponse(data_front)
 
 ## Clear this function after using this example!!!!!
@@ -90,8 +88,8 @@ def get(self):
 
     # tipping.compute()
 
-    power.input['light_level'] = 6.5
-    power.input['temp_level'] = 9.8
+    power.input['light_level'] = 9
+    power.input['temp_level'] = 6
 
     power.compute()
 
