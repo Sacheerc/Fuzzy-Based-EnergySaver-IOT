@@ -345,7 +345,7 @@ export class DashboardComponent implements OnInit {
     });
     // ------------ light power - output chart
 
-    // ------------ tasks chart
+    // ------------ temp power - output chart
     this.canvas = document.getElementById("chartTempPower");
     this.ctx = this.canvas.getContext("2d");
 
@@ -383,7 +383,7 @@ export class DashboardComponent implements OnInit {
       options: gradientChartOptionsConfigurationWithTooltipGreen
 
     });
-    // ------------ tasks chart
+    // ------------ temp power - output chart
 
     // ------------ big chart
     var chart_labels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
@@ -432,41 +432,8 @@ export class DashboardComponent implements OnInit {
     this.myChartData = new Chart(this.ctx, config);
     // ------------ big chart
 
-    // ------------ sales chart
-    this.canvas = document.getElementById("CountryChart");
-    this.ctx  = this.canvas.getContext("2d");
-    var gradientStroke = this.ctx.createLinearGradient(0, 230, 0, 50);
-
-    gradientStroke.addColorStop(1, 'rgba(29,140,248,0.2)');
-    gradientStroke.addColorStop(0.4, 'rgba(29,140,248,0.0)');
-    gradientStroke.addColorStop(0, 'rgba(29,140,248,0)'); //blue colors
-
-
-    var myChart = new Chart(this.ctx, {
-      type: 'bar',
-      responsive: true,
-      legend: {
-        display: false
-      },
-      data: {
-        labels: ['USA', 'GER', 'AUS', 'UK', 'RO', 'BR'],
-        datasets: [{
-          label: "Countries",
-          fill: true,
-          backgroundColor: gradientStroke,
-          hoverBackgroundColor: gradientStroke,
-          borderColor: '#1f8ef1',
-          borderWidth: 2,
-          borderDash: [],
-          borderDashOffset: 0.0,
-          data: [53, 20, 10, 80, 100, 45],
-        }]
-      },
-      options: gradientBarChartConfiguration
-    });
-    // ------------ sales chart
-
   }
+  
   public updateOptions() {
     this.myChartData.data.datasets[0].data = this.data;
     this.myChartData.update();
