@@ -48,4 +48,4 @@ Thumbs.db
 # Lock Files
 package-lock.json
 
-/src/environments/environments.ts
+/src/environments/environment.ts
