@@ -179,7 +179,7 @@ export class MapComponent implements OnInit {
     var data2 = {
       labels: this.timeLineList,
       datasets: [{
-        label: "My First dataset",
+        label: "Data",
         fill: true,
         backgroundColor: gradientStroke,
         borderColor: '#00d6b4',
