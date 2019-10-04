@@ -8,11 +8,11 @@
 
 ESP8266WiFiMulti WiFiMulti;
 int ledPin = D4;
-
+int cond=0;
 void setup() {
-   USE_SERIAL.begin(9600);
+  
    // USE_SERIAL.setDebugOutput(true);
-
+    Serial.begin(9600);
     USE_SERIAL.println();
     USE_SERIAL.println();
     USE_SERIAL.println();
@@ -31,22 +31,29 @@ void setup() {
         digitalWrite(ledPin, 1);
         delay(700);
     }
-
+//
     WiFiMulti.addAP("PROLINK_H5004NK_7C0FF", "0112293636slt");
 
 }
 
-void loop() { 
+void loop() {  
+  float light_out=0;
+  float ac_out=0;    
   if((WiFiMulti.run() == WL_CONNECTED)) {
-        float light_out=0;
-        float ac_out=0;
         digitalWrite(D3,HIGH);
-        delay(100);
-        int temp=analogRead(A0);
+        delay(300);
+        if(cond==0){
+          int temp=27;
+          cond=1;
+          }else{
+          int temp=26;
+            cond=0;
+            }
+        int temp=27;
         digitalWrite(D3,LOW);
         delay(100);
         digitalWrite(D7,HIGH);
-        delay(100);
+        delay(300);
         int light=analogRead(A0);
         digitalWrite(D7,LOW);
         delay(100);
@@ -82,10 +89,16 @@ void loop() {
         Serial.println(ac_out);//Print request response payload
 
         http.end();
+        analogWrite(D5,light_out);
+        analogWrite(D6,ac_out);
+        delay(8000);
   }else{
     Serial.println("Error in WiFi connection");
     digitalWrite(ledPin, 0);
+    delay(200);
   }
-    delay(10000);
+    
 
 }
+
+
