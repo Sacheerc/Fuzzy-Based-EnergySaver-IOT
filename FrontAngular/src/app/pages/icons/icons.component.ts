@@ -57,9 +57,9 @@ export class IconsComponent implements OnInit {
             zeroLineColor: "transparent",
           },
           ticks: {
-            suggestedMin: 2,
-            suggestedMax: 6,
-            padding: 1,
+            suggestedMin: 100,
+            suggestedMax: 900,
+            padding: 20,
             fontColor: "#9a9a9a"
           }
         }],
